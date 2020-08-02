@@ -1,10 +1,15 @@
 import React from "react";
 import "../css/modal.css";
 
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+import { KeyboardDatePicker } from "@material-ui/pickers";
+
 class Modal extends React.Component{
     state={
-        username :'',
-        user_activity :[]
+        username :null,
+        user_activity :[],
+        selectedDate:null
     };
 
     componentDidMount(){
@@ -17,7 +22,10 @@ class Modal extends React.Component{
         this.props.onClose && this.props.onClose(e);
     };
 
-
+    handleDateChange(date){
+        this.setState({selectedDate:date})
+    };
+    
     render(){
         if(!this.props.show){
             return null;
@@ -27,7 +35,23 @@ class Modal extends React.Component{
                 <div className="header">
                     <div> User : {this.state.username}</div>
                 </div>
-                <div className ="content">Recent Activities
+                <div className ="content">
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                            disableToolbar
+                            fullWidth
+                            variant="inline"
+                            format="MM/dd/yyyy"
+                            margin="normal"
+                            id="date-picker-inline"
+                            label="Please Pick A Date to view Activity"
+                            value={this.state.selectedDate}
+                            onChange={this.handleDateChange}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                        />
+                    </MuiPickersUtilsProvider>
                     {this.state.user_activity.map(i => <div>{i.start_time}</div>)}
                 </div>
 

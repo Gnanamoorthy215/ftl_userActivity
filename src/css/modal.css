@@ -31,3 +31,7 @@ button {
     font-size: 0.8rem;
     line-height: 1;
 }
+
+.MuiFormControl-root.MuiTextField-root.MuiFormControl-marginNormal.MuiFormControl-fullWidth{
+    margin-top: 0px !important;
+}
