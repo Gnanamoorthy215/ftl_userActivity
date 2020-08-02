@@ -4,20 +4,21 @@ import "../css/user.css";
 
 import ModalContent from './modalContent.component';
 
+// User component displaying individual User details
 
 class User extends React.Component{
     state ={
-        show:false
+        show:false //state to toogle Modal
     };
 
     showModal = e => {
         this.setState({
-          show: !this.state.show
+          show: !this.state.show // Toggling the state onClick
         });
     };
 
     render(){
-        const { id ,real_name,tz ,activity_periods} = this.props;
+        const { id ,real_name,tz ,activity_periods} = this.props; 
         return(
             <div>
                 <div className="user">
@@ -28,6 +29,8 @@ class User extends React.Component{
                         <button onClick={e => {this.showModal();}}> Activity </button>
                     </div>
                     <ModalContent onClose={this.showModal} show = {this.state.show} activity ={activity_periods} name={real_name}></ModalContent>
+                    {/* In the above lines of code showModal function is passed down as props to Modal component
+                            so as to Change the state to toogle the Modal */}
                 </div>
 
                 <div>

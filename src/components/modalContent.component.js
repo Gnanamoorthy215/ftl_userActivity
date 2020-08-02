@@ -4,7 +4,6 @@ import "../css/modal.css";
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { KeyboardDatePicker } from "@material-ui/pickers";
-import { isDate } from "date-fns";
 import moment from 'moment';
 
 class Modal extends React.Component {
@@ -13,9 +12,9 @@ class Modal extends React.Component {
         super(props);
         this.state = {
             username: null,
-            user_activity: [],
-            selectedDate: null,
-            filteredActivity: []
+            user_activity: [], // state maintaining entire activity of the user
+            selectedDate: null, // state to maintain selected Date 
+            filteredActivity: [] // State to maintain the activity on the selected Date
         }
         this.handleDateChange = this.handleDateChange.bind(this);
     }
@@ -27,7 +26,7 @@ class Modal extends React.Component {
 
     onClose = e => {
         console.log(e);
-        this.props.onClose && this.props.onClose(e);
+        this.props.onClose && this.props.onClose(e); //function to close the modal pop-up
     };
 
     handleDateChange(date) {
@@ -37,13 +36,13 @@ class Modal extends React.Component {
         this.setState({ selectedDate: date });
         this.state.user_activity.forEach(i => {
             if (i) {
-                i.st_time = moment(i.start_time, "MMM D YYYY hmA").format("MM/DD/YYYY");
-                if (i.st_time == moment(selectDate).format("MM/DD/YYYY")) {
-                    filtered.push(i);
+                i.st_time = moment(i.start_time, "MMM D YYYY hmA").format("MM/DD/YYYY");//formatting Date from String
+                if (i.st_time == moment(selectDate).format("MM/DD/YYYY")) { //Checking if Activity Date matches Selected Date
+                    filtered.push(i);//pushing the matched activity to new Array
                 }
             }
         });
-        this.setState({filteredActivity : filtered});
+        this.setState({filteredActivity : filtered});//Setting the state with filtered Array
         console.log("formatted date", this.state.user_activity);
         console.log("filteredActivity", this.state.filteredActivity);
         console.log("selectDate", moment(selectDate).format("MM/DD/YYYY"));
@@ -82,7 +81,8 @@ class Modal extends React.Component {
                     {this.state.filteredActivity.map(i => {
                         return (
                             <div><span>Start time : {i.start_time}</span><br></br>
-                                <span>End time : {i.end_time}</span>
+                                <span>End time : {i.end_time}</span> {/*populating Rows of user activities
+                                                                    by iterating the list of activities on selected Date  */}
                             </div>
                         )
                     })}
