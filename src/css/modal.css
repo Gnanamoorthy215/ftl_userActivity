@@ -16,7 +16,10 @@
     font-size: large;
 }
 .content {
-    padding: 1rem;
+    padding: 0.25rem;
+    height: auto;
+    min-height: 30vh;
+
 }
 .actions {
     border-top: 1px solid #ccc;

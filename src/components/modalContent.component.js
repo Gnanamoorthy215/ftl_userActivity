@@ -33,15 +33,17 @@ class Modal extends React.Component {
     handleDateChange(date) {
         this.setState({ filteredActivity: [] });
         let selectDate = date;
+        let filtered=[];
         this.setState({ selectedDate: date });
         this.state.user_activity.forEach(i => {
             if (i) {
                 i.st_time = moment(i.start_time, "MMM D YYYY hmA").format("MM/DD/YYYY");
                 if (i.st_time == moment(selectDate).format("MM/DD/YYYY")) {
-                    this.state.filteredActivity.push(i);
+                    filtered.push(i);
                 }
             }
         });
+        this.setState({filteredActivity : filtered});
         console.log("formatted date", this.state.user_activity);
         console.log("filteredActivity", this.state.filteredActivity);
         console.log("selectDate", moment(selectDate).format("MM/DD/YYYY"));
@@ -77,9 +79,13 @@ class Modal extends React.Component {
                             }}
                         />
                     </MuiPickersUtilsProvider>
-                    {this.state.filteredActivity.map(i => <div><span>Start time : {i.start_time}</span>
-                        <span>End time : {i.end_time}</span>
-                    </div>)}
+                    {this.state.filteredActivity.map(i => {
+                        return (
+                            <div><span>Start time : {i.start_time}</span><br></br>
+                                <span>End time : {i.end_time}</span>
+                            </div>
+                        )
+                    })}
                 </div>
 
                 <div className="actions">

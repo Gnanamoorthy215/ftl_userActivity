@@ -9,7 +9,7 @@ class UsersCard extends React.Component{
     }
 
     componentDidMount() {
-        fetch('https://run.mocky.io/v3/45045eb1-d74e-49dc-8766-35b01007aad8')
+        fetch('https://run.mocky.io/v3/eaae7c09-a98d-4240-9c3e-f84bd89a91a5')
         .then(res => res.json())
         .then((data) => {
           this.setState({ listOfUsers: data.members })

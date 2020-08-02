@@ -8,7 +8,7 @@ import UsersCard from './components/UsersCard.component';
 function App() {
   return (
     <div className="App">
-        <div>User Session Management</div>
+        <div className = "app-header">User Session Management</div>
         <div>
           <UsersCard></UsersCard>
         </div>
