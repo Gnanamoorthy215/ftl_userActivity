@@ -1,0 +1,14 @@
+.user{
+    display: flex;
+    background-color: #4b5d67;
+    width: 95%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 2%;
+    font-size: small;
+}
+
+.user-field{
+    width: 25%;
+}
